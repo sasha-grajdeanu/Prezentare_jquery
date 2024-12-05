@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="index.css">
+    <title>Depeche Mode Albums</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Depeche Mode Albums</h1>
+    <div id="albums"></div>
+    <script src="script.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("div#albums").addClass("albums");
+            
+            $("div#albums").on("mouseenter", "tr", function(){
+                $(this).css({"background-color": "#A4001E", color: "white"});
+            });
+            $("div#albums").on("mouseleave", "tr", function(){
+                $(this).css({"background-color": "", color: ""});
+            });
+        });
+    </script>
+</body>
+</html>

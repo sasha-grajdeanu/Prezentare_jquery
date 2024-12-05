@@ -1,0 +1,54 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>EVENTS</title>
+    <script>
+      $(document).ready(function () {
+        $("#example_click").dblclick(function () {
+          $(this).hide();
+          $("#btn").show();
+        });
+        $("#btn").click(function () {
+          $("#example_click").show();
+          $(this).hide();
+        });
+        $("#example_click").mouseenter(function () {
+          $("p.hi").show();
+        });
+        $("#example_click").mouseleave(function () {
+          $("p.hi").hide();
+        });
+        $(".auto").mousedown(function () {
+          alert("Ai apasat pe un fragment dintr-un articol");
+        });$(".palo").mouseup(function () {
+          alert("Ai ridicat mana de pe Blur");
+        });
+      });
+    </script>
+  </head>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+  </style>
+  <body>
+    <div id="example_click">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt praesentium
+      quam dignissimos! Libero rerum neque at eum quo molestiae nisi. Facere
+      fugit nisi amet modi cumque qui blanditiis unde quidem!
+    </div>
+    <p class="hi" style="display: none; color: #cf0a0a">
+      Ai pus pointerul pe Lorem ipsum
+    </p>
+    <button id="btn" style="display: none">Show again the message</button>
+    <div>
+      <p class="auto">So, 12 months later, I returned to Copenhagen and headed back to Nordhavn, just a 15-minute metro ride from Copenhagen's central station. </p>
+    </div>
+    <div>
+      <p class="palo">The blur() method attaches an event handler function to an HTML form field.</p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Functions Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        #content {
+            background-color: #f0f0f0;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        button {
+            margin: 5px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>jQuery Functions Demo</h1>
+    
+    <div id="content">
+        <p id="paragraph">This is a paragraph.</p>
+        <input type="text" id="inputField" value="Hello, World!">
+    </div>
+    <button id="changeText">Change Text</button>
+    <button id="changeHTML">Change HTML</button>
+    <button id="getValue">Get Input Value</button>
+    <button id="appendContent">Append Content</button>
+    <button id="prependContent">Prepend Content</button>
+    <button id="insertAfter">Insert After</button>
+    <button id="insertBefore">Insert Before</button>
+    <button id="removeElement">Remove Element</button>
+    <button id="emptyElement">Empty Element</button>
+
+    <script>
+        $(document).ready(function() {
+            $('#changeText').click(function() {
+                $('#paragraph').text('The text has been changed!');
+            });
+            $('#changeHTML').click(function() {
+                $('#paragraph').html('<strong>New HTML content!</strong>');
+            });
+            $('#getValue').click(function() {
+                let value = $('#inputField').val();
+                alert('Input field value: ' + value);
+            });
+            $('#appendContent').click(function() {
+                $('#content').append('<p>Appended content.</p>');
+            });
+            $('#prependContent').click(function() {
+                $('#content').prepend('<p>Prepended content.</p>');
+            });
+            $('#insertAfter').click(function() {
+                $('#content').after('<p>This is inserted after the div.</p>');
+            });
+            $('#insertBefore').click(function() {
+                $('#content').before('<p>This is inserted before the div.</p>');
+            });
+            $('#removeElement').click(function() {
+                $('#paragraph').remove();
+                $('#inputField').remove();
+            });
+            $('#emptyElement').click(function() {
+                $('#content').empty();
+            });
+        });
+    </script>
+</body>
+</html>

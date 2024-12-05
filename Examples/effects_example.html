@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Effects Examples</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        .box {
+            width: 150px;
+            height: 150px;
+            background-color: rebeccapurple;
+            margin: 20px;
+            display: none;
+        }
+        .hidden { display: none; }
+        button { margin: 10px; }
+    </style>
+</head>
+<body>
+    <button id="fadeInBtn">Fade In</button>
+    <button id="fadeOutBtn">Fade Out</button>
+    <button id="fadeToggleBtn">Fade Toggle</button>
+    <button id="slideToggleBtn">Slide Toggle</button>
+    <button id="animateBtn">Animate</button>
+    
+    <div class="box"></div>
+    
+    <script>
+        $(document).ready(function() {
+            $('#fadeInBtn').click(function() {
+                $('.box').fadeIn(1000);
+            });
+            $('#fadeOutBtn').click(function() {
+                $('.box').fadeOut(1000);
+            });
+            $('#fadeToggleBtn').click(function() {
+                $('.box').fadeToggle(500);
+            });
+            $('#slideToggleBtn').click(function() {
+                $('.box').slideToggle(500);
+            });
+            $('#animateBtn').click(function() {
+                $('.box').animate({
+                    width: "300px",
+                    height: "300px",
+                    opacity: 0.5,
+                    marginLeft: "50px",
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+</html>

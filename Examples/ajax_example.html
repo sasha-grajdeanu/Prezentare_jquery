@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jQuery AJAX Functions Demo</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      input {
+        display: block;
+        margin-bottom: 10px;
+        padding: 8px;
+        width: 250px;
+      }
+      button {
+        margin: 10px 5px;
+        padding: 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+      #result {
+        margin-top: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        background-color: #f9f9f9;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>jQuery AJAX Functions Demo</h1>
+    <input type="text" id="title" placeholder="Enter title" />
+    <input type="text" id="body" placeholder="Enter body content" />
+    <button id="postData">Create Post (ajax())</button>
+    <button id="getData">Get All Posts (get())</button>
+    <button id="getJSONData">Get User Info (getJSON())</button>
+    <button id="loadData">Load External Content (load())</button>
+
+    <div id="result">Result will be displayed here...</div>
+
+    <script>
+      $(document).ready(function () {
+        $("#postData").click(function () {
+          const title = $("#title").val();
+          const body = $("#body").val();
+
+          if (title === "" || body === "") {
+            $("#result").html(
+              '<span style="color:red;">Please fill in both fields.</span>'
+            );
+            return;
+          }
+
+          $.ajax({
+            url: "http://127.0.0.1:5000/create_post",
+            type: "POST",
+            contentType: "application/json", 
+            data: JSON.stringify({
+              title: title,
+              body: body,
+            }),
+            success: function (response) {
+              $("#result").html(
+                `<strong>Post Created!</strong><br>
+                 <strong>ID:</strong> ${response.id} <br>
+                 <strong>Title:</strong> ${response.title} <br>
+                 <strong>Body:</strong> ${response.body}`
+              );
+            },
+            error: function (xhr, status, error) {
+              $("#result").html(
+                '<span style="color:red;">Error sending data: ' +
+                  error +
+                  "</span>"
+              );
+            },
+          });
+        });
+        $("#getData").click(function () {
+          $.get("http://127.0.0.1:5000/get_posts", function (response) {
+            if (response.length === 0) {
+              $("#result").html("<strong>No posts found.</strong>");
+              return;
+            }
+            let resultHtml = "<strong>All Posts:</strong><br>";
+            response.forEach((post) => {
+              resultHtml += `<br><strong>ID:</strong> ${post.id} <br>
+                                       <strong>Title:</strong> ${post.title} <br>
+                                       <strong>Body:</strong> ${post.body} <br>`;
+            });
+            $("#result").html(resultHtml);
+          }).fail(function () {
+            $("#result").html(
+              '<span style="color:red;">Error fetching data.</span>'
+            );
+          });
+        });
+        $("#getJSONData").click(function () {
+          $.getJSON(
+            "https://jsonplaceholder.typicode.com/users/1",
+            function (data) {
+              $("#result").html(
+                `<strong>User Info:</strong><br>
+                         <strong>Name:</strong> ${data.name} <br>
+                         <strong>Email:</strong> ${data.email} <br>
+                         <strong>Company:</strong> ${data.company.name}`
+              );
+            }
+          ).fail(function () {
+            $("#result").html(
+              '<span style="color:red;">Error fetching JSON data.</span>'
+            );
+          });
+        });
+        $("#loadData").click(function () {
+          $("#result").load(
+            "https://jsonplaceholder.typicode.com/posts/1",
+            function (response, status, xhr) {
+              if (status === "error") {
+                $("#result").html(
+                  '<span style="color:red;">Error loading external content.</span>'
+                );
+              } else {
+                $("#result").html(
+                  "<strong>External Content Loaded:</strong><br>" + response
+                );
+              }
+            }
+          );
+        });
+      });
+    </script>
+  </body>
+</html>
